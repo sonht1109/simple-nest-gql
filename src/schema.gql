@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Account {
+  id: Float!
+  username: String!
+  password: String!
+}
+
+type PaginationMeta {
+  page: Float!
+  take: Float!
+  total: Float!
+  totalPage: Float!
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
+type PaginatedAccount {
+  data: [Account!]!
+  meta: PaginationMeta!
+}
+
+type Query {
+  accounts(order: Order = DESC, take: Int = 10, page: Int = 1): PaginatedAccount!
+  account(id: Int!): Account!
+}
+
+enum Order {
+  ASC
+  DESC
+}
+
+type Mutation {
+  createAccount(input: CreateAccountInput!): Account!
+
+  """Update account"""
+  updateAccount(input: UpdateAccountInput!): Account!
+  removeAccount(id: Int!): EnumCode!
+}
+
+input CreateAccountInput {
+  username: String!
+  password: String!
+}
+
+input UpdateAccountInput {
+  username: String
+  password: String
+  id: Int!
+}
+
+enum EnumCode {
+  SUCCESS
+  FAIL
+}

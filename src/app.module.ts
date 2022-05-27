@@ -11,6 +11,7 @@ import { ormConfig } from './common/configs/orm.config';
 @Module({
   imports: [
     AccountModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot(gqlConfig),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
