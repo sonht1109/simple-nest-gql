@@ -7,6 +7,7 @@ import { gqlConfig } from './common/configs/gql.config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ormConfig } from './common/configs/orm.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ormConfig } from './common/configs/orm.config';
       useFactory: ormConfig,
       inject: [ConfigService],
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

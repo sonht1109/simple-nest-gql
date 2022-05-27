@@ -6,6 +6,12 @@ type Account {
   id: Float!
   username: String!
   password: String!
+  role: EnumRole!
+}
+
+enum EnumRole {
+  USER
+  ADMIN
 }
 
 type PaginationMeta {
@@ -23,11 +29,11 @@ type PaginatedAccount {
 }
 
 type Query {
-  accounts(order: Order = DESC, take: Int = 10, page: Int = 1): PaginatedAccount!
+  accounts(order: EnumOrder = DESC, take: Int = 10, page: Int = 1): PaginatedAccount!
   account(id: Int!): Account!
 }
 
-enum Order {
+enum EnumOrder {
   ASC
   DESC
 }
@@ -38,20 +44,28 @@ type Mutation {
   """Update account"""
   updateAccount(input: UpdateAccountInput!): Account!
   removeAccount(id: Int!): EnumCode!
+  login(input: LoginInput!): Account!
 }
 
 input CreateAccountInput {
   username: String!
   password: String!
+  role: EnumRole!
 }
 
 input UpdateAccountInput {
   username: String
   password: String
+  role: EnumRole
   id: Int!
 }
 
 enum EnumCode {
   SUCCESS
   FAIL
+}
+
+input LoginInput {
+  username: String!
+  password: String!
 }

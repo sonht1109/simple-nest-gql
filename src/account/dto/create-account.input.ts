@@ -1,4 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { IsEnum } from 'class-validator';
+import { EnumRole } from 'src/common/enum/enum.role';
 
 @InputType()
 export class CreateAccountInput {
@@ -7,4 +9,8 @@ export class CreateAccountInput {
 
   @Field()
   password: string;
+
+  @Field(() => EnumRole)
+  @IsEnum(EnumRole)
+  role: EnumRole;
 }

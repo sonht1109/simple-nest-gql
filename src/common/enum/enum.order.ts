@@ -5,4 +5,4 @@ export enum EnumOrder {
   DESC = 'DESC',
 }
 
-registerEnumType(EnumOrder, { name: 'Order' });
+registerEnumType(EnumOrder, { name: 'EnumOrder' });

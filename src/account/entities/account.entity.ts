@@ -1,4 +1,6 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Extensions } from '@nestjs/graphql';
+import { EnumRole } from 'src/common/enum/enum.role';
+import { FieldGuard } from 'src/common/guards/field.guard';
 import {
   Column,
   CreateDateColumn,
@@ -20,7 +22,12 @@ export class Account {
   @Column({ type: 'varchar', unique: true })
   username: string;
 
-  @Field()
+  @Extensions({ role: EnumRole.ADMIN, authIdField: 'id' })
+  @Field({ middleware: [FieldGuard] })
   @Column({ type: 'varchar' })
   password: string;
+
+  @Field(() => EnumRole)
+  @Column({ type: 'enum', enum: EnumRole, default: EnumRole.USER })
+  role: EnumRole;
 }
